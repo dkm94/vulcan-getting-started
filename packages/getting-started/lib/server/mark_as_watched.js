@@ -7,7 +7,6 @@ const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 const markAsWatched = {
   Mutation: {
     async markAsWatched(root, { movieId }, context) {
-
       // add a 2s delay to simulate a slower operation
       await sleep(2000);
 
@@ -22,6 +21,7 @@ const markAsWatched = {
   },
 };
 
-// uncomment on #Step18
-// addGraphQLResolvers(markAsWatched);
-// addGraphQLMutation(`markAsWatched(movieId: String): Movie`);
+// créer un nouveau resolver
+ addGraphQLResolvers(markAsWatched);
+ //créer une nouvelle mutation pour editStatus
+ addGraphQLMutation(`markAsWatched(movieId: String): Movie`);

@@ -19,12 +19,15 @@ const schema = {
     type: String,
     optional: true,
     canRead: ['guests'],
-    // Uncomment on #Step10:
-    // relation: {
-    //   fieldName: 'user',
-    //   typeName: 'User',
-    //   kind: 'hasOne'
-    // }
+    //ne pas oublier d'ajouter la relation (modèle) au fragment si fragment
+    relation: {
+      // nouveau modèle user
+      fieldName: 'user',
+      // de type User
+      typeName: 'User',
+      //un film est associé à un use
+      kind: 'hasOne'
+    }
   },
 
   name: {
@@ -36,7 +39,7 @@ const schema = {
     canUpdate: ['members'],
     searchable: true,
     // Uncomment on #Step19
-    // intl: true, 
+    intl: true, 
   },
 
   review: {

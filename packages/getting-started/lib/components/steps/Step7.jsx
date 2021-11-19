@@ -39,7 +39,11 @@ query QueryResolvers{
 ~~~
 `,
 ];
-
+// Const query: va stocker les données (qui ensuite seront fetch avecle hook useQuery)
+// gql: template du paquet TS graphql-tag qui permet de parse la query string ci-dessous en query format Apollo
+// QueryResolvers : nom de la requête from /lib/hocs/withQueryResolvers.js
+// requête de type/name QUERY
+// On veut récupérer les champs: name
 const query = gql`
   query QueryResolvers {
     __type(name: "Query") {
@@ -51,12 +55,22 @@ const query = gql`
 `;
 
 const Step = () => {
+
+  // item qu'on va aller chercher qui pour l'instant est vide
   const item = {};
-  // uncomment the hook on #Step7
-  // const { data } = useQuery(query);
-  // item.queries = get(data, '__type.fields');
+
+  // fetch data;
+  const { data } = useQuery(query);
+
+  // fonction lodash qui prend 2 (object, path) ou 3 ([defaultValue]) params 
+  // ici, l'objet data (réponse de la query) et le chemin (Array ou string, ici c'est un string), voir la requête gql au dessus
+  item.queries = get(data, '__type.fields');
+  
+  // item retourne un objet qui contient un unique attribut queries
+  // queries est un array de 10 éléments
   return (
     <StepWrapper title={Step.title} text={text} after={after} check={() => !!item.queries}>
+      {/* Queries: component qui va mapper sur l'attribut "queries" du tableau d'items*/}
       <Queries queries={item.queries} />
     </StepWrapper>
   );

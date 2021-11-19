@@ -23,6 +23,7 @@ As you can see, our three \`createMovie\`, \`updateMovie\`, and \`deleteMovie\` 
 By the way, we've been talking about auto-generated mutations but you can also [write your own](http://docs.vulcanjs.org/mutations.html#GraphQL-Mutations) create, update, and delete mutations resolvers on the server if you need to (and the same also goes for the multi and single query resolvers). 
 `;
 
+// 
 const query = gql`
   query MutationResolvers {
     __type(name: "Mutation") {
@@ -36,8 +37,8 @@ const query = gql`
 const Step = () => {
   const items = {};
   // uncomment the hook on #Step13
-  // const { data } = useQuery(query);
-  // items.mutations = get(data, '__type.fields');
+  const { data } = useQuery(query);
+  items.mutations = get(data, '__type.fields');
   return (
     <StepWrapper title={Step.title} text={text} after={after} check={() => !!items.mutations}>
       <Mutations mutations={items.mutations} />
